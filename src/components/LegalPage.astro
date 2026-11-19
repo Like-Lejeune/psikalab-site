@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { useT, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang; doc: 'privacy' | 'terms' }
+const { lang, doc } = Astro.props;
+const t = useT(lang);
+
+const files = import.meta.glob('../content/legal/*.md', { eager: true }) as Record<string, any>;
+const file = files[`../content/legal/${doc}.${lang}.md`];
+const { Content, frontmatter } = file;
+const headings: { depth: number; slug: string; text: string }[] = file.getHeadings().filter((h: any) => h.depth === 2);
+---
+<Base lang={lang} page={doc} title={frontmatter.title}>
+  <div class="container" style="padding-top:96px;padding-bottom:112px">
+    <p class="eyebrow">{t('legal.eyebrow')}</p>
+    <h1 class="h1" style="margin-top:24px">{frontmatter.title}</h1>
+    <p class="label" style="margin:20px 0 0;text-transform:none;letter-spacing:0;font-size:13px">{t('legal.updated')} : {frontmatter.updated}</p>
+    <div class="legal-grid">
+      <nav class="toc" aria-label={t('legal.toc')}>
+        <span class="label" style="margin-bottom:8px">{t('legal.toc')}</span>
+        <ol>
+          {headings.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
+        </ol>
+      </nav>
+      <article class="prose">
+        <Content />
+      </article>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .legal-grid { margin-top: 56px; display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start; }
+  .toc { flex: 1 1 220px; position: sticky; top: 100px; display: flex; flex-direction: column; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); }
+  @media (max-width: 900px) { .toc { position: static; } }
+  .toc ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; color: var(--muted-2); font-size: 14px; }
+  .toc a { color: var(--soft); text-decoration: none; padding: 4px 0; display: inline-block; }
+  .prose { flex: 999 1 560px; min-width: 0; max-width: 760px; counter-reset: h2; }
+  .prose :global(p), .prose :global(li) { font-size: 16px; line-height: 1.75; color: var(--soft); }
+  .prose :global(> p:first-child) { font-size: 18px; color: var(--text); margin-top: 0; }
+  .prose :global(h2) { counter-increment: h2; margin: 48px 0 14px; font-family: var(--font-display); font-size: 26px; font-weight: 600; letter-spacing: -.02em; color: var(--text-strong); scroll-margin-top: 96px; }
+  .prose :global(h2::before) { content: counter(h2) ". "; }
+  .prose :global(ul) { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .prose :global(a) { color: var(--text-strong); }
+</style>

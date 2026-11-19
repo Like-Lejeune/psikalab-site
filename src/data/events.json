@@ -1,0 +1,103 @@
+[
+  {
+    "id": "maillon-launch",
+    "featured": true,
+    "date": "2026-12-01",
+    "time": "",
+    "timezone": "WAT",
+    "location": "yaounde",
+    "venue": "",
+    "type": "psikalab",
+    "registerUrl": "",
+    "badge": "Maillon",
+    "fr": {
+      "title": "Soirée de lancement de Maillon",
+      "kind": "Lancement",
+      "description": "Présentation publique de notre plateforme de calcul IA décentralisé, démo live et échanges avec l'équipe."
+    },
+    "en": {
+      "title": "Maillon launch night",
+      "kind": "Launch",
+      "description": "Public unveiling of our decentralized AI compute platform, with a live demo and Q&A with the team."
+    }
+  },
+  {
+    "id": "hackathon-ia-fintech",
+    "featured": true,
+    "date": null,
+    "time": "",
+    "timezone": "WAT",
+    "location": "douala",
+    "venue": "",
+    "type": "hackathon",
+    "registerUrl": "",
+    "badge": "48h",
+    "fr": {
+      "title": "Hackathon IA & Fintech",
+      "kind": "Hackathon",
+      "description": "48 heures pour prototyper des solutions IA aux problèmes de paiement, d'anti-fraude mobile money et d'inclusion financière."
+    },
+    "en": {
+      "title": "AI & Fintech Hackathon",
+      "kind": "Hackathon",
+      "description": "48 hours to prototype AI solutions for payments, mobile money anti-fraud and financial inclusion."
+    }
+  },
+  {
+    "id": "atelier-donnees-ia",
+    "featured": false,
+    "date": null,
+    "time": "",
+    "timezone": "WAT",
+    "location": "online",
+    "venue": "",
+    "type": "workshop",
+    "registerUrl": "",
+    "fr": {
+      "title": "Atelier : sécuriser ses données face aux outils IA",
+      "description": "Comment éviter les fuites de données sensibles vers ChatGPT, Claude et consorts en entreprise."
+    },
+    "en": {
+      "title": "Workshop: securing your data against AI tools",
+      "description": "How companies can prevent sensitive data from leaking to ChatGPT, Claude and the like."
+    }
+  },
+  {
+    "id": "builders-night-abidjan",
+    "featured": false,
+    "date": null,
+    "time": "",
+    "timezone": "GMT",
+    "location": "abidjan",
+    "venue": "",
+    "type": "psikalab",
+    "registerUrl": "",
+    "fr": {
+      "title": "Builders Night PsikaLab",
+      "description": "Rencontre informelle entre développeurs, chercheurs et fondateurs de la tech africaine."
+    },
+    "en": {
+      "title": "PsikaLab Builders Night",
+      "description": "An informal meetup for developers, researchers and founders in African tech."
+    }
+  },
+  {
+    "id": "atelier-prototype-produit",
+    "featured": false,
+    "date": null,
+    "time": "",
+    "timezone": "GMT",
+    "location": "dakar",
+    "venue": "",
+    "type": "workshop",
+    "registerUrl": "",
+    "fr": {
+      "title": "Atelier : du prototype IA au produit",
+      "description": "La méthode PsikaLab pour passer d'une démo à un produit utilisé, avec retours d'expérience."
+    },
+    "en": {
+      "title": "Workshop: from AI prototype to product",
+      "description": "The PsikaLab method for turning a demo into a product people use, with lessons learned."
+    }
+  }
+]

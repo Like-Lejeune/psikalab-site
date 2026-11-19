@@ -1,0 +1,28 @@
+{
+  "name": "PsikaLab",
+  "domain": "psikalab.space",
+  "city": "Yaoundé",
+  "contact": {
+    "email": "contact@psikalab.space",
+    "phone": "[+237 X XX XX XX XX]",
+    "address": { "fr": "[Adresse], Yaoundé, Cameroun", "en": "[Address], Yaoundé, Cameroon" },
+    "replyDays": "[X]"
+  },
+  "stats": [
+    { "fr": "Projets lancés", "en": "Projects launched", "value": "[XX]" },
+    { "fr": "Membres du labo", "en": "Lab members", "value": "[XX]" },
+    { "fr": "Pays couverts", "en": "Countries covered", "value": "[XX]" },
+    { "fr": "Utilisateurs servis", "en": "Users served", "value": "[XX]+" }
+  ],
+  "partners": [
+    { "name": "[Partenaire 1]", "logo": "", "url": "" },
+    { "name": "[Partenaire 2]", "logo": "", "url": "" },
+    { "name": "[Partenaire 3]", "logo": "", "url": "" },
+    { "name": "[Partenaire 4]", "logo": "", "url": "" },
+    { "name": "[Partenaire 5]", "logo": "", "url": "" }
+  ],
+  "social": {
+    "github": "https://github.com/[compte]",
+    "linkedin": "https://www.linkedin.com/company/[page]"
+  }
+}

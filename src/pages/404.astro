@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { useT } from '../i18n/ui';
+const fr = useT('fr');
+const en = useT('en');
+---
+<Base lang="fr" page="" title={fr('404.title')}>
+  <section class="container hero" style="min-height:50vh">
+    <p class="eyebrow">404</p>
+    <h1 class="h1" style="margin-top:24px">{fr('404.title')}</h1>
+    <p class="lead" style="margin-top:20px">{fr('404.text')} <span lang="en">— {en('404.text')}</span></p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:40px">
+      <a class="btn btn-primary" href="/fr/">{fr('404.home')}</a>
+      <a class="btn btn-ghost" href="/en/" lang="en">{en('404.home')}</a>
+    </div>
+  </section>
+</Base>

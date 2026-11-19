@@ -1,0 +1,146 @@
+---
+import Base from '../../layouts/Base.astro';
+import { useT, path, getStaticLangPaths, type Lang } from '../../i18n/ui';
+import { getContent } from '../../lib/content';
+
+export const getStaticPaths = getStaticLangPaths;
+const lang = Astro.params.lang as Lang;
+const t = useT(lang);
+const { projects } = await getContent();
+
+const domains = ['all', 'ai', 'fintech', 'cyber', 'tools'];
+const colors: Record<string, string> = {
+  accent: 'var(--accent)', ivory: '#F2F1EC', blue: '#4D9FFF', orange: '#FF6B35', violet: '#B98CFF',
+};
+---
+<Base lang={lang} page="work" title={t('work.title')}>
+  <div class="container" style="padding-top:72px;padding-bottom:112px">
+    <section aria-labelledby="work-title" class="section-head" style="padding-bottom:48px;border-bottom:1px solid var(--line);margin-bottom:0">
+      <div style="flex:1 1 560px;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+          <span class="tag" style="background:var(--accent);color:var(--on-accent);border-color:var(--accent)">{t('work.badge')}</span>
+          <span class="label" style="text-transform:none;letter-spacing:0;font-size:13px">{t('work.built')}</span>
+        </div>
+        <h1 id="work-title" class="h1">{t('work.title')}</h1>
+        <p class="lead" style="font-size:18px">{t('work.lead')}</p>
+      </div>
+      <a class="btn btn-ghost" href={path(lang, 'contact')}>{t('work.submit')}</a>
+    </section>
+
+    <div style="margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+      <div role="group" aria-label={t('events.filters')} style="display:flex;flex-wrap:wrap;gap:8px">
+        {domains.map((d) => (
+          <button type="button" class="pill js-domain" data-value={d} aria-pressed={d === 'all' ? 'true' : 'false'}>
+            {d === 'all' ? t('work.all') : t(`work.domain.${d}` as any)}
+          </button>
+        ))}
+      </div>
+      <span class="label js-count" aria-live="polite" data-one={t('work.count.one')} data-many={t('work.count.many')}>{projects.length} {t('work.count.many')}</span>
+    </div>
+
+    <ul class="grid">
+      {projects.map((p) => {
+        const c = p[lang] as { title?: string; status: string; tagline: string };
+        const title = c.title ?? p.name;
+        const link = p.url || p.demoUrl;
+        return (
+          <li class="project js-project" data-domain={p.domain}>
+            <a class="project-visual" href={p.demoUrl || link || undefined} target={link ? '_blank' : undefined} rel={link ? 'noopener' : undefined} aria-label={`${t('work.demoOf')} ${p.name}`} style={p.image ? `background-image:url(${p.image})` : `background:${colors[p.color] ?? colors.accent}`}>
+              {!p.image && <span class="project-name">{p.name}</span>}
+              {p.demoUrl && (
+                <span class="demo-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                  {t('work.demo')}
+                </span>
+              )}
+            </a>
+            <div class="project-body">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="avatars" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span style="font-size:13px;color:var(--muted-2)">{p.team}</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                {link
+                  ? <a class="h3 project-title" href={link} target="_blank" rel="noopener">{title}</a>
+                  : <h2 class="h3 project-title">{title}</h2>}
+                <p class="project-tagline">{c.tagline}</p>
+              </div>
+              <div class="project-foot">
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <span class="tag">{t(`work.domain.${p.domain}` as any)}</span>
+                  <span class="tag tag-accent">{c.status}</span>
+                </div>
+                <button type="button" class="back-btn js-back" data-id={p.id} aria-pressed="false" data-on={t('work.backed')} data-off={t('work.back')}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+                  <span>{t('work.back')}</span>
+                </button>
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+    <p class="js-empty muted" hidden style="padding:56px 0;text-align:center;margin:0">{t('work.empty')}</p>
+  </div>
+</Base>
+
+<style>
+  .grid { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+  @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
+  .project { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--bg-2); }
+  .project-visual { position: relative; display: flex; align-items: flex-end; height: 200px; padding: 20px; background-size: cover; background-position: center; text-decoration: none; color: var(--on-accent); }
+  .project-visual:hover { color: var(--on-accent); }
+  .project-name { font-family: var(--font-display); font-size: 40px; font-weight: 700; letter-spacing: -.04em; line-height: 1; }
+  .demo-badge { position: absolute; top: 16px; right: 16px; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: rgba(10,10,11,.85); color: var(--text-strong); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+  .project-body { flex: 1 1 auto; display: flex; flex-direction: column; gap: 14px; padding: 22px; }
+  .project-title { text-decoration: none; }
+  .project-tagline { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .project-foot { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+  .avatars { display: flex; }
+  .avatars i { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--bg-2); background: #2e2e33; }
+  .avatars i + i { margin-left: -8px; background: #3a3a40; }
+  .avatars i:last-child { background: #46464d; }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border-radius: 999px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; background: transparent; color: var(--text-strong); border: 1px solid var(--line-2); }
+  .back-btn[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+</style>
+
+<script>
+  // Filtres par domaine
+  const items = [...document.querySelectorAll<HTMLElement>('.js-project')];
+  const count = document.querySelector<HTMLElement>('.js-count');
+  const empty = document.querySelector<HTMLElement>('.js-empty');
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('.js-domain')) {
+    btn.addEventListener('click', () => {
+      const v = btn.dataset.value;
+      document.querySelectorAll('.js-domain').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      let n = 0;
+      for (const it of items) {
+        const ok = v === 'all' || it.dataset.domain === v;
+        it.hidden = !ok;
+        if (ok) n++;
+      }
+      if (count) count.textContent = `${n} ${n > 1 ? count.dataset.many : count.dataset.one}`;
+      if (empty) empty.hidden = n > 0;
+    });
+  }
+
+  // Bouton "Soutenir" : mémorisé dans le navigateur du visiteur
+  const KEY = 'psikalab-backed';
+  let backed: string[] = [];
+  try { backed = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch {}
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('.js-back')) {
+    const label = btn.querySelector('span')!;
+    const render = (on: boolean) => {
+      btn.setAttribute('aria-pressed', String(on));
+      label.textContent = on ? btn.dataset.on! : btn.dataset.off!;
+    };
+    render(backed.includes(btn.dataset.id!));
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id!;
+      const on = !backed.includes(id);
+      backed = on ? [...backed, id] : backed.filter((x) => x !== id);
+      try { localStorage.setItem(KEY, JSON.stringify(backed)); } catch {}
+      render(on);
+    });
+  }
+</script>

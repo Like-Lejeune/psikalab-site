@@ -1,0 +1,49 @@
+---
+import { useT, path, type Lang } from '../i18n/ui';
+import { getContent } from '../lib/content';
+import FormScript from './FormScript.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const year = new Date().getFullYear();
+const { site } = await getContent();
+---
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-col">
+      <span class="label">{t('footer.lab')}</span>
+      <a href={path(lang)}>{t('nav.about')}</a>
+      <a href={path(lang, 'work')}>{t('nav.work')}</a>
+      <a href={path(lang, 'join')}>{t('nav.join')}</a>
+      <a href={path(lang, 'contact')}>{t('contact.title')}</a>
+    </div>
+    <div class="footer-col">
+      <span class="label">{t('footer.community')}</span>
+      <a href={path(lang, 'events')}>{t('nav.events')}</a>
+      <a href={site.social.github} rel="noopener" target="_blank">GitHub</a>
+      <a href={site.social.linkedin} rel="noopener" target="_blank">LinkedIn</a>
+    </div>
+    <div class="footer-col footer-news">
+      <form class="js-form" data-form="newsletter" data-lang={lang} novalidate>
+        <label for="nl-email" class="label" style="display:block;margin-bottom:12px">{t('footer.newsletter')}</label>
+        <div class="js-fields inline-form">
+          <input id="nl-email" name="email" type="email" required autocomplete="email" class="input" placeholder={t('form.email.ph')} />
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button class="btn btn-primary" type="submit" data-label={t('footer.subscribe')} data-sending={t('form.sending')}>{t('footer.subscribe')}</button>
+        </div>
+        <p class="js-error form-error" role="alert" hidden style="margin-top:12px">{t('form.error', { email: site.contact.email })}</p>
+        <p class="js-done" role="status" hidden style="margin:0;color:var(--accent)">{t('footer.subscribed')}</p>
+      </form>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© {year} PsikaLab · {site.city}</span>
+    <nav aria-label={t('legal.eyebrow')}>
+      <a href={path(lang, 'join')}>{t('nav.join')}</a>
+      <a href={path(lang, 'terms')}>{t('footer.terms')}</a>
+      <a href={path(lang, 'privacy')}>{t('footer.privacy')}</a>
+    </nav>
+  </div>
+</footer>
+<FormScript />

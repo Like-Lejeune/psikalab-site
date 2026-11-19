@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import { useT, path, getStaticLangPaths, type Lang } from '../../i18n/ui';
+import { getContent } from '../../lib/content';
+
+export const getStaticPaths = getStaticLangPaths;
+const lang = Astro.params.lang as Lang;
+const t = useT(lang);
+const { site } = await getContent();
+
+const services = [1, 2, 3, 4].map((n) => ({
+  num: String(n).padStart(2, '0'),
+  title: t(`home.s${n}.title` as any),
+  text: t(`home.s${n}.text` as any),
+}));
+---
+<Base lang={lang} page="" title={t('home.title')}>
+  <section class="container hero">
+    <p class="eyebrow">{t('home.eyebrow')}</p>
+    <h1 class="h1" style="margin-top:24px;max-width:980px">{t('home.h1')}</h1>
+    <p class="lead">{t('home.lead')}</p>
+    <div class="stats">
+      {site.stats.map((s) => (
+        <div class="stat">
+          <div class="label">{s[lang]}</div>
+          <div class="stat-value">{s.value}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="partners" aria-labelledby="partners-title">
+    <div class="container partners-inner">
+      <h2 id="partners-title" class="label" style="margin:0;font-weight:400">{t('home.partners')}</h2>
+      <div class="partners-list">
+        {site.partners.map((p) => {
+          const inner = p.logo ? <img src={p.logo} alt={p.name} loading="lazy" /> : <span>{p.name}</span>;
+          return p.url
+            ? <a class="partner" href={p.url} target="_blank" rel="noopener">{inner}</a>
+            : <div class="partner">{inner}</div>;
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="services-title" style="border-top:0">
+    <div class="container">
+      <h2 id="services-title" class="h2" style="margin-bottom:48px">{t('home.services')}</h2>
+      <div class="cards">
+        {services.map((s) => (
+          <a class="card" href={path(lang, 'contact')}>
+            <span class="card-num">{s.num}</span>
+            <span class="h3" style="font-size:24px">{s.title}</span>
+            <p>{s.text}</p>
+            <span class="card-more">{t('home.services.more')}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container" style="padding-top:112px;padding-bottom:112px">
+    <div class="cta">
+      <h2>{t('home.cta')}</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a class="btn btn-dark btn-lg" href={path(lang, 'contact')}>{t('nav.contact')}</a>
+        <a class="btn btn-outline-dark btn-lg" href={path(lang, 'join')}>{t('nav.join')}</a>
+      </div>
+    </div>
+  </section>
+</Base>

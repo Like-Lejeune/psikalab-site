@@ -1,0 +1,53 @@
+# Compile le site et publie le résultat (dist/) sur la branche "deploy",
+# que Hostinger met en ligne automatiquement. Se lance :
+#  - à chaque push sur main ;
+#  - quand le back-office Laravel signale un changement de contenu (content-updated) ;
+#  - à la main depuis l'onglet Actions.
+#
+# Variables du dépôt (Settings > Secrets and variables > Actions > Variables) :
+#  - CONTENT_API_URL       ex. https://api.psikalab.space/api/content (vide = fichiers src/data/*.json)
+#  - PUBLIC_FORMS_ENDPOINT ex. https://api.psikalab.space/api/forms   (vide = public/api/submit.php)
+name: Build & deploy
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [content-updated]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+        env:
+          CONTENT_API_URL: ${{ vars.CONTENT_API_URL }}
+          PUBLIC_FORMS_ENDPOINT: ${{ vars.PUBLIC_FORMS_ENDPOINT }}
+
+      - name: Publish dist/ to the deploy branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: deploy
+          publish_dir: ./dist
+          force_orphan: true
+          enable_jekyll: true   # évite d'ajouter un fichier .nojekyll inutile
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_message: Deploy ${{ github.sha }}

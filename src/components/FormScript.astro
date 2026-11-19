@@ -1,0 +1,61 @@
+---
+// Gère tous les formulaires marqués .js-form : envoi vers /api/submit.php,
+// état "envoi…", message d'erreur, puis bloc de confirmation.
+---
+<script>
+  // Adresse de réception des formulaires : l'API Laravel si PUBLIC_FORMS_ENDPOINT est
+  // définie (ex. https://api.psikalab.space/api/forms), sinon le script PHP du site.
+  const ENDPOINT = import.meta.env.PUBLIC_FORMS_ENDPOINT || '/api/submit.php';
+
+  for (const form of document.querySelectorAll<HTMLFormElement>('form.js-form')) {
+    const fields = form.querySelector<HTMLElement>('.js-fields');
+    const done = form.querySelector<HTMLElement>('.js-done');
+    const error = form.querySelector<HTMLElement>('.js-error');
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const again = form.querySelector<HTMLButtonElement>('.js-again');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (error) error.hidden = true;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.form = form.dataset.form ?? 'contact';
+      data.lang = form.dataset.lang ?? 'fr';
+      if (submit) {
+        submit.disabled = true;
+        submit.textContent = submit.dataset.sending ?? '…';
+      }
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || !json.ok) throw new Error(json.error || res.statusText);
+        form.reset();
+        if (fields) fields.hidden = true;
+        if (done) {
+          done.hidden = false;
+          done.focus?.();
+        }
+      } catch {
+        if (error) error.hidden = false;
+      } finally {
+        if (submit) {
+          submit.disabled = false;
+          submit.textContent = submit.dataset.label ?? '';
+        }
+      }
+    });
+
+    again?.addEventListener('click', () => {
+      if (fields) fields.hidden = false;
+      if (done) done.hidden = true;
+      form.querySelector<HTMLElement>('input:not(.hp), textarea, select')?.focus();
+    });
+  }
+</script>

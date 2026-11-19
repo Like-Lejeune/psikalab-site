@@ -1,0 +1,93 @@
+---
+import Base from '../../layouts/Base.astro';
+import { useT, path, getStaticLangPaths, type Lang } from '../../i18n/ui';
+import { getContent } from '../../lib/content';
+
+export const getStaticPaths = getStaticLangPaths;
+const lang = Astro.params.lang as Lang;
+const t = useT(lang);
+const { site } = await getContent();
+const profiles = [1, 2, 3, 4].map((n) => ({ num: `0${n}`, title: t(`join.p${n}.title` as any), text: t(`join.p${n}.text` as any) }));
+const steps = [1, 2, 3, 4].map((n) => ({ n, title: t(`join.st${n}.title` as any), text: t(`join.st${n}.text` as any) }));
+const options = ['dev', 'ai', 'design', 'partner', 'other'];
+---
+<Base lang={lang} page="join" title={t('join.title')}>
+  <section class="container hero">
+    <p class="eyebrow">{t('join.title')}</p>
+    <h1 class="h1" style="margin-top:24px;max-width:960px">{t('join.h1')}</h1>
+    <p class="lead">{t('join.lead')}</p>
+    <a class="btn btn-primary btn-lg" href="#apply" style="margin-top:40px">{t('join.apply')}</a>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="profiles">
+    <div class="container">
+      <h2 id="profiles" class="h2" style="margin-bottom:48px">{t('join.profiles')}</h2>
+      <div class="cards">
+        {profiles.map((p) => (
+          <div class="card">
+            <span class="card-num">{p.num}</span>
+            <span class="h3">{p.title}</span>
+            <p>{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container section" aria-labelledby="how">
+    <h2 id="how" class="h2" style="margin-bottom:48px">{t('join.how')}</h2>
+    <ol class="steps">
+      {steps.map((s) => (
+        <li>
+          <span class="label">{t('join.step')} {s.n}</span>
+          <span class="h3" style="font-size:20px">{s.title}</span>
+          <span class="muted" style="font-size:15px">{s.text}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section id="apply" class="container" aria-labelledby="apply-title" style="padding-bottom:112px;scroll-margin-top:96px">
+    <div class="panel" style="display:flex;flex-wrap:wrap;gap:48px">
+      <div style="flex:1 1 300px;display:flex;flex-direction:column;gap:16px">
+        <h2 id="apply-title" class="h2" style="font-size:clamp(28px,3.6vw,44px)">{t('join.form.title')}</h2>
+        <p class="muted" style="margin:0">{t('join.form.lead')}</p>
+      </div>
+      <form class="js-form form" data-form="join" data-lang={lang} aria-label={t('join.form')} novalidate style="flex:2 1 480px">
+        <div class="js-fields form">
+          <div class="form-row">
+            <div class="field"><label class="label" for="j-name">{t('form.name')}</label><input id="j-name" name="name" class="input" required maxlength="120" autocomplete="name" placeholder={t('form.name.ph')} /></div>
+            <div class="field"><label class="label" for="j-email">{t('form.email')}</label><input id="j-email" name="email" type="email" class="input" required maxlength="160" autocomplete="email" placeholder={t('form.email.ph')} /></div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label class="label" for="j-profile">{t('join.profile')}</label>
+              <select id="j-profile" name="profile" class="input">
+                {options.map((o) => <option value={o}>{t(`join.profile.${o}` as any)}</option>)}
+              </select>
+            </div>
+            <div class="field"><label class="label" for="j-link">{t('join.link')}</label><input id="j-link" name="link" type="url" class="input" maxlength="300" placeholder="https://" /></div>
+          </div>
+          <div class="field"><label class="label" for="j-why">{t('join.why')}</label><textarea id="j-why" name="message" class="input" rows="5" required minlength="10" maxlength="5000" placeholder={t('join.why.ph')}></textarea></div>
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <p class="js-error form-error" role="alert" hidden>{t('form.error', { email: site.contact.email })}</p>
+          <div class="form-foot">
+            <span class="form-note">{t('join.consent')} <a href={path(lang, 'privacy')}>{t('form.privacy')}</a>.</span>
+            <button type="submit" class="btn btn-primary btn-lg" data-label={t('join.send')} data-sending={t('form.sending')}>{t('join.send')}</button>
+          </div>
+        </div>
+        <div class="js-done form-done" role="status" tabindex="-1" hidden>
+          <div class="form-done-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5" /></svg></div>
+          <h3 class="h3" style="font-size:28px">{t('join.done.title')}</h3>
+          <p class="muted" style="margin:0">{t('join.done.text')}</p>
+          <button type="button" class="btn btn-ghost js-again">{t('join.done.again')}</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
+  .steps li { display: flex; flex-direction: column; gap: 10px; padding-top: 20px; border-top: 2px solid var(--accent); }
+</style>

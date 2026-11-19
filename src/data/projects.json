@@ -1,0 +1,110 @@
+[
+  {
+    "id": "maillon",
+    "name": "Maillon",
+    "domain": "ai",
+    "color": "accent",
+    "image": "",
+    "demoUrl": "",
+    "url": "",
+    "team": "[Équipe]",
+    "fr": { "status": "Lancement déc. 2026", "tagline": "Plateforme de calcul IA décentralisé : les appareils du réseau mutualisent leur puissance pour exécuter des tâches IA." },
+    "en": { "status": "Launching Dec 2026", "tagline": "Decentralized AI compute platform: devices on the network pool their power to run AI tasks." }
+  },
+  {
+    "id": "qrmap",
+    "name": "QRMap",
+    "domain": "tools",
+    "color": "ivory",
+    "image": "",
+    "demoUrl": "",
+    "url": "",
+    "team": "[Équipe]",
+    "fr": { "status": "[Statut]", "tagline": "Navigation indoor par QR code pour se repérer dans les bâtiments complexes : hôpitaux, campus, centres commerciaux." },
+    "en": { "status": "[Status]", "tagline": "QR-code indoor navigation for finding your way in complex buildings: hospitals, campuses, malls." }
+  },
+  {
+    "id": "iamodelize3d",
+    "name": "IaModelize3d",
+    "domain": "ai",
+    "color": "blue",
+    "image": "",
+    "demoUrl": "",
+    "url": "",
+    "team": "[Équipe]",
+    "fr": { "status": "[Statut]", "tagline": "Studio IA de conception 3D : décrire un objet et obtenir un modèle prêt à imprimer ou à intégrer." },
+    "en": { "status": "[Status]", "tagline": "AI 3D design studio: describe an object and get a model ready to print or embed." }
+  },
+  {
+    "id": "mangastudio",
+    "name": "MangaStudio",
+    "domain": "ai",
+    "color": "orange",
+    "image": "",
+    "demoUrl": "",
+    "url": "",
+    "team": "[Équipe]",
+    "fr": { "status": "[Statut]", "tagline": "Génération de manga par IA, du scénario aux planches, pour les créateurs qui veulent raconter vite." },
+    "en": { "status": "[Status]", "tagline": "AI manga generation, from script to pages, for creators who want to tell stories fast." }
+  },
+  {
+    "id": "reserva",
+    "name": "Reserva",
+    "domain": "tools",
+    "color": "violet",
+    "image": "",
+    "demoUrl": "",
+    "url": "",
+    "team": "[Équipe]",
+    "fr": { "status": "[Statut]", "tagline": "Gestion des rapports de finition pour les ingénieurs du génie civil, pensée pour les chantiers africains." },
+    "en": { "status": "[Status]", "tagline": "Punch-list reporting for civil engineers, designed for African construction sites." }
+  },
+  {
+    "id": "orbe",
+    "name": "Orbe",
+    "domain": "ai",
+    "color": "ivory",
+    "image": "",
+    "demoUrl": "",
+    "url": "",
+    "team": "[Équipe]",
+    "fr": { "status": "[Statut]", "tagline": "Agent d'accueil virtuel sur smartphone pour les banques et les hôpitaux." },
+    "en": { "status": "[Status]", "tagline": "A virtual reception agent on smartphones for banks and hospitals." }
+  },
+  {
+    "id": "dlp-ia",
+    "name": "DLP IA",
+    "domain": "cyber",
+    "color": "accent",
+    "image": "",
+    "demoUrl": "",
+    "url": "",
+    "team": "[Équipe]",
+    "fr": { "title": "[Nom] — DLP pour outils IA", "status": "[Statut]", "tagline": "Contrôle de ce que les employés envoient à ChatGPT, Claude et autres outils IA, pour garder la souveraineté des données." },
+    "en": { "title": "[Name] — DLP for AI tools", "status": "[Status]", "tagline": "Controls what employees send to ChatGPT, Claude and other AI tools, to keep data sovereignty." }
+  },
+  {
+    "id": "simucredit",
+    "name": "SimuCredit",
+    "domain": "fintech",
+    "color": "blue",
+    "image": "",
+    "demoUrl": "",
+    "url": "",
+    "team": "[Équipe]",
+    "fr": { "status": "[Statut]", "tagline": "Simulateur de crédit avec tableau d'amortissement, PDF sécurisé par OTP et notifications SMS." },
+    "en": { "status": "[Status]", "tagline": "Loan simulator with an amortization schedule, OTP-secured PDFs and SMS notifications." }
+  },
+  {
+    "id": "amekit",
+    "name": "Amekit",
+    "domain": "fintech",
+    "color": "orange",
+    "image": "",
+    "demoUrl": "",
+    "url": "",
+    "team": "[Équipe]",
+    "fr": { "status": "[Statut]", "tagline": "Marchés prédictifs en mode démo : s'entraîner avec des FCFA fictifs sur de vrais marchés." },
+    "en": { "status": "[Status]", "tagline": "Prediction markets in demo mode: practice with play-money FCFA on real markets." }
+  }
+]

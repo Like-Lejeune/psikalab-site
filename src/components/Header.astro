@@ -1,0 +1,47 @@
+---
+import { useT, path, otherLang, type Lang } from '../i18n/ui';
+import Logo from './Logo.astro';
+
+interface Props { lang: Lang; page: string }
+const { lang, page } = Astro.props;
+const t = useT(lang);
+const other = otherLang(lang);
+const links = [
+  { page: 'events', label: t('nav.events') },
+  { page: 'work', label: t('nav.work') },
+  { page: '', label: t('nav.about') },
+];
+---
+<header class="site-header">
+  <nav class="container nav" aria-label={t('nav.label')}>
+    <a class="brand" href={path(lang)}>
+      <Logo />
+      PsikaLab
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label={t('nav.menu')}>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <div class="lang-switch" role="group" aria-label={t('lang.label')}>
+        {(['fr', 'en'] as const).map((l) =>
+          l === lang
+            ? <span aria-current="true">{l.toUpperCase()}</span>
+            : <a href={path(other, page)} hreflang={other} lang={other} aria-label={t('lang.other')}>{l.toUpperCase()}</a>
+        )}
+      </div>
+      {links.map((l) => (
+        <a class="nav-link" href={path(lang, l.page)} aria-current={page === l.page ? 'page' : undefined}>{l.label}</a>
+      ))}
+      <a class="btn btn-primary" href={path(lang, 'contact')}>{t('nav.contact')}</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const menu = document.getElementById('nav-links');
+  btn?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('open') ?? false;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+</script>
