@@ -9,17 +9,17 @@
     "replyDays": "1-2 jours ouvrables"
   },
   "stats": [
-    { "fr": "Projets lancés", "en": "Projects launched", "value": "5" },
+    { "fr": "Projets lancés", "en": "Projects launched", "value": "8" },
     { "fr": "Membres du labo", "en": "Lab members", "value": "12" },
     { "fr": "Pays couverts", "en": "Countries covered", "value": "6" },
     { "fr": "Utilisateurs servis", "en": "Users served", "value": "1000+" }
   ],
   "partners": [
-    { "name": "[Partenaire 1]", "logo": "", "url": "" },
-    { "name": "[Partenaire 2]", "logo": "", "url": "" },
-    { "name": "[Partenaire 3]", "logo": "", "url": "" },
-    { "name": "[Partenaire 4]", "logo": "", "url": "" },
-    { "name": "[Partenaire 5]", "logo": "", "url": "" }
+    { "name": "TrustChange", "logo": "", "url": "" },
+    { "name": "Inova", "logo": "", "url": "" },
+    { "name": "TechAfrican", "logo": "", "url": "" },
+    { "name": "AfricanAI", "logo": "", "url": "" },
+    { "name": "DataForGood", "logo": "", "url": "" }
   ],
   "social": {
     "github": "https://github.com/",
