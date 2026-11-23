@@ -2,7 +2,7 @@
   {
     "id": "maillon-launch",
     "featured": true,
-    "date": "2026-12-01",
+    "date": "2027-01-5",
     "time": "",
     "timezone": "WAT",
     "location": "yaounde",
@@ -19,28 +19,6 @@
       "title": "Maillon launch night",
       "kind": "Launch",
       "description": "Public unveiling of our decentralized AI compute platform, with a live demo and Q&A with the team."
-    }
-  },
-  {
-    "id": "hackathon-ia-fintech",
-    "featured": true,
-    "date": null,
-    "time": "",
-    "timezone": "WAT",
-    "location": "douala",
-    "venue": "",
-    "type": "hackathon",
-    "registerUrl": "",
-    "badge": "48h",
-    "fr": {
-      "title": "Hackathon IA & Fintech",
-      "kind": "Hackathon",
-      "description": "48 heures pour prototyper des solutions IA aux problèmes de paiement, d'anti-fraude mobile money et d'inclusion financière."
-    },
-    "en": {
-      "title": "AI & Fintech Hackathon",
-      "kind": "Hackathon",
-      "description": "48 hours to prototype AI solutions for payments, mobile money anti-fraud and financial inclusion."
     }
   },
   {

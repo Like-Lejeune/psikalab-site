@@ -4,15 +4,15 @@
   "city": "Yaoundé",
   "contact": {
     "email": "contact@psikalab.space",
-    "phone": "[+237 X XX XX XX XX]",
-    "address": { "fr": "[Adresse], Yaoundé, Cameroun", "en": "[Address], Yaoundé, Cameroon" },
-    "replyDays": "[X]"
+    "phone": "+237 6 95 24 95 49",
+    "address": { "fr": "Gare Marchande, Yaoundé, Cameroun", "en": "Gare Marchande, Yaoundé, Cameroon" },
+    "replyDays": "1-2 jours ouvrables"
   },
   "stats": [
-    { "fr": "Projets lancés", "en": "Projects launched", "value": "[XX]" },
-    { "fr": "Membres du labo", "en": "Lab members", "value": "[XX]" },
-    { "fr": "Pays couverts", "en": "Countries covered", "value": "[XX]" },
-    { "fr": "Utilisateurs servis", "en": "Users served", "value": "[XX]+" }
+    { "fr": "Projets lancés", "en": "Projects launched", "value": "5" },
+    { "fr": "Membres du labo", "en": "Lab members", "value": "12" },
+    { "fr": "Pays couverts", "en": "Countries covered", "value": "6" },
+    { "fr": "Utilisateurs servis", "en": "Users served", "value": "1000+" }
   ],
   "partners": [
     { "name": "[Partenaire 1]", "logo": "", "url": "" },
@@ -22,7 +22,7 @@
     { "name": "[Partenaire 5]", "logo": "", "url": "" }
   ],
   "social": {
-    "github": "https://github.com/[compte]",
-    "linkedin": "https://www.linkedin.com/company/[page]"
+    "github": "https://github.com/",
+    "linkedin": "https://www.linkedin.com/company/psikalab/"
   }
 }

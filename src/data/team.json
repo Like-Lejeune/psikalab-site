@@ -1,34 +1,10 @@
 [
   {
     "name": "Yves Fouda Ondoa",
-    "initials": "YF",
+    "initials": "LIKE",
     "photo": "",
     "linkedin": "",
     "fr": { "role": "Fondateur, PsikaLab" },
     "en": { "role": "Founder, PsikaLab" }
-  },
-  {
-    "name": "[Nom Prénom]",
-    "initials": "",
-    "photo": "",
-    "linkedin": "",
-    "fr": { "role": "[Rôle]" },
-    "en": { "role": "[Role]" }
-  },
-  {
-    "name": "[Nom Prénom]",
-    "initials": "",
-    "photo": "",
-    "linkedin": "",
-    "fr": { "role": "[Rôle]" },
-    "en": { "role": "[Role]" }
-  },
-  {
-    "name": "[Nom Prénom]",
-    "initials": "",
-    "photo": "",
-    "linkedin": "",
-    "fr": { "role": "[Rôle]" },
-    "en": { "role": "[Role]" }
   }
 ]
